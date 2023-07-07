@@ -1,0 +1,38 @@
+.mainWrapper{
+    height: 200vh;
+    background-color: #ffd94f;
+}
+.section{
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#section1{
+    background-color: #ffd94f;
+}
+#section2{
+    background-color: #2121210d;
+}
+#section3{
+    background-color: #00508dde;
+}
+.sectionHeader{
+    font-family:'Times New Roman', Times, serif;
+    font-weight: 700;
+    font-size: 32px;
+    font-style: italic;
+    letter-spacing: 2px;
+}
+
+#section1 .sectionHeader{
+    color: black;
+}
+
+#section2 .sectionHeader{
+    color: white;
+}
+#section3 .sectionHeader{
+    color: black;
+}
