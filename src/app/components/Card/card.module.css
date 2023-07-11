@@ -1,0 +1,18 @@
+.card {
+    border: 1px solid #0000008e;
+    border-radius: 20px;
+    padding: 1.3rem;
+    background-color: white;
+}
+
+.breakLine {
+    width: 100%;
+    height: 0.6px;
+    background-color: #0000008e;
+    margin: auto;
+    margin: 4px 0;
+}
+
+.cardBody {
+    padding-top: 10px;
+}

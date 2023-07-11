@@ -104,6 +104,20 @@
     overflow: hidden;
 }
 
+.linkItems li a:hover {
+    position: relative;
+}
+
+.linkItems li a:hover+.hoverCard, .hoverCard:hover {
+    display: block;
+}
+
+.hoverCard {
+    position: absolute;
+    display: none;
+    max-width: 280px;
+}
+
 @media screen and (max-width: 1024px) {
     .show {
         display: block;
