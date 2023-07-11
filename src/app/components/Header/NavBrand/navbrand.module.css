@@ -1,0 +1,10 @@
+.navBrandLogo {
+    max-width: 100px;
+}
+
+@media screen and (max-width: 425px) {
+    .navBrandLogo {
+        width: 90px;
+    }
+}
+

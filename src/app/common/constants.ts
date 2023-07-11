@@ -11,3 +11,9 @@ export const enum SCROLL_DIRECTION {
     LEFT='LEFT',
     RIGHT='RIGHT',
 }
+
+export const enum BUTTON_THEME{
+    'NORMAL' = 'btnNormal',
+    'GREY' = 'btnGrey',
+    'YELLOW' = 'btnYellow',
+}

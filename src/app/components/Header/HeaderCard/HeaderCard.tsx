@@ -1,5 +1,7 @@
 import { Ref, useEffect, useRef } from "react";
 import styles from "./headercard.module.css";
+import Button from "../../Button/Button";
+import { BUTTON_THEME } from "@/app/common/constants";
 
 export const HeaderCard = (props: {
   display: boolean;
@@ -50,9 +52,12 @@ export const HeaderCard = (props: {
           <div className={styles.call}>855-665-0134</div>
         </div>
         <div className={styles.cardActions}>
-          <a className={styles.btnGrey}>
-            <span className={styles.actionText}>Sign in</span>
-            <span>
+          <Button
+            onClick={() => {}}
+            theme={BUTTON_THEME.GREY}
+            buttonStyle={{ color: "black", fontWeight: "700" }}
+            
+            afterTextIcon={
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -68,11 +73,15 @@ export const HeaderCard = (props: {
                 <polyline points="10 17 15 12 10 7"></polyline>
                 <line x1="15" y1="12" x2="3" y2="12"></line>
               </svg>
-            </span>
-          </a>
-          <a className={styles.btnYellow}>
-            <span className={styles.actionText}>Get an offer</span>
-            <span>
+            }
+          >
+            <span className={styles.actionText}>Sign in</span>
+          </Button>
+          <Button
+            onClick={() => {}}
+            theme={BUTTON_THEME.YELLOW}
+            buttonStyle={{ color: "black", fontWeight: "700" }}
+            afterTextIcon={
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -87,8 +96,10 @@ export const HeaderCard = (props: {
                 <line x1="7" y1="17" x2="17" y2="7"></line>
                 <polyline points="7 7 17 7 17 17"></polyline>
               </svg>
-            </span>
-          </a>
+            }
+          >
+            <span className={styles.actionText}>Get an offer</span>
+          </Button>
         </div>
       </div>
     </>
