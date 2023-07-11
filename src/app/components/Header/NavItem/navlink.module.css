@@ -1,0 +1,13 @@
+.navlink{
+    position: relative;
+}
+
+.navlink:hover+.hoverCard, .hoverCard:hover {
+    display: block;
+}
+
+.hoverCard {
+    position: absolute;
+    display: none;
+    max-width: 280px;
+}

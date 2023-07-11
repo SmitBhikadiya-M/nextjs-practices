@@ -2,6 +2,7 @@ import { Ref, useEffect, useRef } from "react";
 import styles from "./headercard.module.css";
 import Button from "../../Button/Button";
 import { BUTTON_THEME } from "@/app/common/constants";
+import NavLink from "../NavItem/NavLink";
 
 export const HeaderCard = (props: {
   display: boolean;
@@ -17,14 +18,13 @@ export const HeaderCard = (props: {
         !popupRef.current?.contains(e.target) &&
         props.headerRef.current &&
         !props.headerRef.current?.contains(e.target) &&
-        props.setMenuHide &&
-        props.display
+        props.setMenuHide
       ) {
         props.setMenuHide();
       }
     };
 
-    if (props.display) document.body.addEventListener("click", handleBodyClick);
+    document.body.addEventListener("click", handleBodyClick);
 
     return () => {
       document.body.removeEventListener("click", handleBodyClick);
@@ -39,11 +39,11 @@ export const HeaderCard = (props: {
       >
         <div className={styles.cardLinks}>
           <ul>
-            <li>How it works</li>
-            <li>About us</li>
-            <li>Blog</li>
-            <li>FAQs</li>
-            <li>Help center</li>
+            <li><NavLink href="#" children={"How it works"} /></li>
+            <li><NavLink href="#" children={"About us"} /></li>
+            <li><NavLink href="#" children={"Blog"} /></li>
+            <li><NavLink href="#" children={"FAQs"} /></li>
+            <li><NavLink href="#" children={"Help center"} /></li>
           </ul>
         </div>
         <div className={styles.border}></div>
@@ -57,7 +57,7 @@ export const HeaderCard = (props: {
             theme={BUTTON_THEME.GREY}
             buttonStyle={{ color: "black", fontWeight: "700" }}
             
-            afterTextIcon={
+            icon={
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -81,7 +81,7 @@ export const HeaderCard = (props: {
             onClick={() => {}}
             theme={BUTTON_THEME.YELLOW}
             buttonStyle={{ color: "black", fontWeight: "700" }}
-            afterTextIcon={
+            icon={
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"

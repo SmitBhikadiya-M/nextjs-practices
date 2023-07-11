@@ -8,8 +8,8 @@
   --border-intial-color: #000000;
   --text-black-theme: #212121da;
 
-  --main-bg-color-hover: #ffd025;
-  --grey-bg-color-hover: #201e1e0d;
+  --main-bg-color-hover: #f0c219;
+  --grey-bg-color-hover: #2121211a;
 }
 
 @media (prefers-color-scheme: dark) {

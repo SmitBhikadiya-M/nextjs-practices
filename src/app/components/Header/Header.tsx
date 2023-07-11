@@ -6,10 +6,11 @@ import { BUTTON_THEME, SCREENS, SCROLL_DIRECTION } from "@/app/common/constants"
 import Card from "../Card/Card";
 import Button from "../Button/Button";
 import NavBrand from "./NavBrand/NavBrand";
+import NavLink from "./NavItem/NavLink";
 
 export const Header = () => {
   const headerRef = useRef(null);
-  const [toggleMenu, setToggleMenu] = useState(true);
+  const [toggleMenu, setToggleMenu] = useState(false);
   const [currentWindowWidth, setCurrentWindowWidth] = useState(
     window.innerWidth
   );
@@ -133,19 +134,16 @@ export const Header = () => {
             >
               <ul className={styles.linkItems}>
                 <li>
-                  <a href="#">How it works</a>
+                  <NavLink href="#" children={"How it works"} />
                 </li>
                 <li>
-                  <a href="#">About us</a>
+                  <NavLink href="#" children={"About us"} />  
                 </li>
                 <li>
-                  <a href="#">Blog</a>
-                  <div className={styles.hoverCard}>
-                    <Card />
-                  </div>
+                  <NavLink href="#" children={"Blog"} hoverCard={<Card />}/>
                 </li>
                 <li>
-                  <a href="#">FAQs</a>
+                  <NavLink href="#" children={"FAQs"} />
                 </li>
                 <li>
                   <a href="#">Help Center</a>
@@ -157,7 +155,7 @@ export const Header = () => {
                 <li>
                   <Button
                     onClick={handleCall}
-                    afterTextIcon={
+                    icon={
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="24"
@@ -184,7 +182,7 @@ export const Header = () => {
                 <li>
                   <Button
                     onClick={handleChat}
-                    afterTextIcon={
+                    icon={
                       <svg
                         width="24"
                         height="24"
@@ -229,11 +227,11 @@ export const Header = () => {
             </nav>
           </div>
         </div>
-        <HeaderCard
+        {toggleMenu && <HeaderCard
           headerRef={headerRef}
           display={toggleMenu}
           setMenuHide={hideMenu}
-        />
+        /> }
       </header>
     </>
   );

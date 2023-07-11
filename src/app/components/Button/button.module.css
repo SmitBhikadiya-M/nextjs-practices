@@ -49,3 +49,15 @@
     color: var(--text-black-theme);
     border-width: 0px;
 }
+
+.btnGrey:hover{
+    background-color: var(--grey-bg-color-hover);
+}
+
+.aftertext{
+    margin-right: 0.35rem;
+}
+
+.beforetext{
+    margin-left: 0.35rem;
+}
