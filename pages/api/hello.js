@@ -19,6 +19,7 @@ export default function handler(req, res) {
     xReal: req.headers['x-real-ip'],
     remoteADD: req.connection.remoteAddress,
     userAgen: req.headers['user-agent'],
+    localADD: req.socket.localAddress,
     ip
   })
 
