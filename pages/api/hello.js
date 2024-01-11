@@ -2,7 +2,7 @@
 
 var regexes = {
   ipv4: /^(?:(?:\d|[1-9]\d|1\d{2}|2[0-4]\d|25[0-5])\.){3}(?:\d|[1-9]\d|1\d{2}|2[0-4]\d|25[0-5])$/,
-  ipv6: /^((?=.*::)(?!.*::.+::)(::)?([\dA-F]{1,4}:(:|\b)|){5}|([\dA-F]{1,4}:){6})((([\dA-F]{1,4}((?!\3)::|:\b|$))|(?!\2\3)){2}|(((2[0-4]|1\d|[1-9])?\d|25[0-5])\.?\b){4})$/i
+  ipv6: /^((?=.*::)(?!.*::.+::)(::)?([\dA-F]{1,4}:(:|\b)|){5}|([\dA-F]{1,4}:){6})((([\dA-F]{1,4}((?!\3)::|:\b|$))|(?!\2\3)){2}|(((2[0-4]|1\d|[1-9])?\d|25[0-5])\.?\b){4})$/i,
 };
 
 function not(func) {
@@ -16,7 +16,9 @@ function existy(value) {
 }
 
 function ip(value) {
-  return existy(value) && regexes.ipv4.test(value) || regexes.ipv6.test(value);
+  return (
+    (existy(value) && regexes.ipv4.test(value)) || regexes.ipv6.test(value)
+  );
 }
 
 function object(value) {
@@ -24,7 +26,7 @@ function object(value) {
 }
 
 function string(value) {
-  return Object.prototype.toString.call(value) === '[object String]';
+  return Object.prototype.toString.call(value) === "[object String]";
 }
 
 var is = {
@@ -36,8 +38,8 @@ var is = {
     existy: not(existy),
     ip: not(ip),
     object: not(object),
-    string: not(string)
-  }
+    string: not(string),
+  },
 };
 
 function getClientIpFromXForwardedFor(value) {
@@ -46,14 +48,14 @@ function getClientIpFromXForwardedFor(value) {
   }
 
   if (is.not.string(value)) {
-    throw new TypeError("Expected a string, got \"".concat(_typeof(value), "\""));
+    throw new TypeError('Expected a string, got "'.concat(_typeof(value), '"'));
   }
 
-  var forwardedIps = value.split(',').map(function (e) {
+  var forwardedIps = value.split(",").map(function (e) {
     var ip = e.trim();
 
-    if (ip.includes(':')) {
-      var splitted = ip.split(':');
+    if (ip.includes(":")) {
+      var splitted = ip.split(":");
 
       if (splitted.length === 2) {
         return splitted[0];
@@ -74,50 +76,52 @@ function getClientIpFromXForwardedFor(value) {
 
 function getClientIp(req) {
   if (req.headers) {
-    if (is.ip(req.headers['x-client-ip'])) {
-      return req.headers['x-client-ip'];
+    if (is.ip(req.headers["x-client-ip"])) {
+      return req.headers["x-client-ip"];
     }
 
-    var xForwardedFor = getClientIpFromXForwardedFor(req.headers['x-forwarded-for']);
+    var xForwardedFor = getClientIpFromXForwardedFor(
+      req.headers["x-forwarded-for"]
+    );
 
     if (is.ip(xForwardedFor)) {
       return xForwardedFor;
     }
 
-    if (is.ip(req.headers['cf-connecting-ip'])) {
-      return req.headers['cf-connecting-ip'];
+    if (is.ip(req.headers["cf-connecting-ip"])) {
+      return req.headers["cf-connecting-ip"];
     }
 
-    if (is.ip(req.headers['fastly-client-ip'])) {
-      return req.headers['fastly-client-ip'];
+    if (is.ip(req.headers["fastly-client-ip"])) {
+      return req.headers["fastly-client-ip"];
     }
 
-    if (is.ip(req.headers['true-client-ip'])) {
-      return req.headers['true-client-ip'];
+    if (is.ip(req.headers["true-client-ip"])) {
+      return req.headers["true-client-ip"];
     }
 
-    if (is.ip(req.headers['x-real-ip'])) {
-      return req.headers['x-real-ip'];
+    if (is.ip(req.headers["x-real-ip"])) {
+      return req.headers["x-real-ip"];
     }
 
-    if (is.ip(req.headers['x-cluster-client-ip'])) {
-      return req.headers['x-cluster-client-ip'];
+    if (is.ip(req.headers["x-cluster-client-ip"])) {
+      return req.headers["x-cluster-client-ip"];
     }
 
-    if (is.ip(req.headers['x-forwarded'])) {
-      return req.headers['x-forwarded'];
+    if (is.ip(req.headers["x-forwarded"])) {
+      return req.headers["x-forwarded"];
     }
 
-    if (is.ip(req.headers['forwarded-for'])) {
-      return req.headers['forwarded-for'];
+    if (is.ip(req.headers["forwarded-for"])) {
+      return req.headers["forwarded-for"];
     }
 
     if (is.ip(req.headers.forwarded)) {
       return req.headers.forwarded;
     }
 
-    if (is.ip(req.headers['x-appengine-user-ip'])) {
-      return req.headers['x-appengine-user-ip'];
+    if (is.ip(req.headers["x-appengine-user-ip"])) {
+      return req.headers["x-appengine-user-ip"];
     }
   }
 
@@ -126,7 +130,10 @@ function getClientIp(req) {
       return req.connection.remoteAddress;
     }
 
-    if (is.existy(req.connection.socket) && is.ip(req.connection.socket.remoteAddress)) {
+    if (
+      is.existy(req.connection.socket) &&
+      is.ip(req.connection.socket.remoteAddress)
+    ) {
       return req.connection.socket.remoteAddress;
     }
   }
@@ -139,13 +146,17 @@ function getClientIp(req) {
     return req.info.remoteAddress;
   }
 
-  if (is.existy(req.requestContext) && is.existy(req.requestContext.identity) && is.ip(req.requestContext.identity.sourceIp)) {
+  if (
+    is.existy(req.requestContext) &&
+    is.existy(req.requestContext.identity) &&
+    is.ip(req.requestContext.identity.sourceIp)
+  ) {
     return req.requestContext.identity.sourceIp;
   }
 
   if (req.headers) {
-    if (is.ip(req.headers['Cf-Pseudo-IPv4'])) {
-      return req.headers['Cf-Pseudo-IPv4'];
+    if (is.ip(req.headers["Cf-Pseudo-IPv4"])) {
+      return req.headers["Cf-Pseudo-IPv4"];
     }
   }
 
@@ -156,29 +167,47 @@ function getClientIp(req) {
   return null;
 }
 
-export default function handler(req, res) {
+// export default function handler(req, res) {
 
-  let ip;
-  if (req.headers['x-forwarded-for']) {
-    ip = req.headers['x-forwarded-for'].split(',')[0];
-  } else if (req.headers['x-real-ip']) {
-    ip = req.connection.remoteAddress;
-  } else {
-    ip = req.connection.remoteAddress;
+//   let ip;
+//   if (req.headers['x-forwarded-for']) {
+//     ip = req.headers['x-forwarded-for'].split(',')[0];
+//   } else if (req.headers['x-real-ip']) {
+//     ip = req.connection.remoteAddress;
+//   } else {
+//     ip = req.connection.remoteAddress;
+//   }
+//   console.log(ip, getClientIp(req));
+
+//   res.status(200).json({
+//     name: 'John Doe',
+//     xForwarded: req.headers['x-forwarded-for'],
+//     xReal: req.headers['x-real-ip'],
+//     remoteADD: req.connection.remoteAddress,
+//     userAgen: req.headers['user-agent'],
+//     localADD: req.socket.localAddress,
+//     ip,
+//     getClientIp: getClientIp(req),
+//     vatsal: req.client._peername
+//   })
+
+// }
+
+import os from "os";
+
+export default async function handler(req, res) {
+  try {
+    // Get client's IPv4 address using request-ip
+    const ipv4 = getClientIp(req);
+
+    // Get client's IPv6 address using os module
+    const interfaces = os.networkInterfaces();
+    const ipv6 = interfaces["en0"]?.find(
+      (entry) => entry.family === "IPv6"
+    )?.address;
+    res.status(200).json({ ipv4, ipv6 });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
   }
-  console.log(ip, getClientIp(req));
-
-
-  res.status(200).json({
-    name: 'John Doe',
-    xForwarded: req.headers['x-forwarded-for'],
-    xReal: req.headers['x-real-ip'],
-    remoteADD: req.connection.remoteAddress,
-    userAgen: req.headers['user-agent'],
-    localADD: req.socket.localAddress,
-    ip,
-    getClientIp: getClientIp(req),
-    vatsal: req.client._peername
-  })
-
 }
