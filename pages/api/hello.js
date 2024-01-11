@@ -202,10 +202,21 @@ export default async function handler(req, res) {
 
     // Get client's IPv6 address using os module
     const interfaces = os.networkInterfaces();
-    const ipv6 = interfaces["en0"]?.find(
-      (entry) => entry.family === "IPv6"
-    )?.address;
-    res.status(200).json({ ipv4, ipv6, ipv7: req.connection.remoteAddress });
+    const ipv6 =
+      req.connection.remoteAddress ||
+      req.socket.remoteAddress ||
+      req.connection.socket.remoteAddress;
+
+    console.log(req.socket._peername);
+
+    res.status(200).json({
+      ipv4,
+      ipv6,
+      ipv7: req.connection.remoteAddress,
+      ipv8: req.socket.remoteAddress,
+      ipv9: req.connection.socket?.remoteAddress,
+      ipv10: req.socket._peername,
+    });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal Server Error" });
