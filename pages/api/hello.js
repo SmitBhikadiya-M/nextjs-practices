@@ -177,7 +177,8 @@ export default function handler(req, res) {
     userAgen: req.headers['user-agent'],
     localADD: req.socket.localAddress,
     ip,
-    getClientIp: getClientIp(req)
+    getClientIp: getClientIp(req),
+    vatsal: req.client._peername
   })
 
 }
