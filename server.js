@@ -9,7 +9,7 @@ app.prepare().then(() => {
   const server = express();
 
   // Explicitly listen on IPv6 address
-  server.listen(3000, '::', (err) => {
+  server.listen(3000, (err) => {
     if (err) throw err;
     console.log('> Ready on http://[::]:3000');
   });
