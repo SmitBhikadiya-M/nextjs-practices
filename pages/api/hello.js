@@ -209,6 +209,18 @@ export default async function handler(req, res) {
 
     console.log(req.socket._peername);
 
+    const networkInterfaces = os.networkInterfaces();
+    const ipv6Addresses = [];
+
+    for (const interfaceName in networkInterfaces) {
+      const interfaces = networkInterfaces[interfaceName];
+      for (const iface of interfaces) {
+        if (iface.family === "IPv6") {
+          ipv6Addresses.push(iface.address);
+        }
+      }
+    }
+
     res.status(200).json({
       ipv4,
       ipv6,
@@ -217,6 +229,7 @@ export default async function handler(req, res) {
       ipv9: req.connection.socket?.remoteAddress,
       ipv10: req.socket._peername,
       ipv11: req.headers["x-forwarded-for"],
+      ipv12: ipv6Addresses,
     });
   } catch (error) {
     console.error(error);
