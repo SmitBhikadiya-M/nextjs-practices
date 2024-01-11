@@ -176,7 +176,8 @@ export default function handler(req, res) {
     remoteADD: req.connection.remoteAddress,
     userAgen: req.headers['user-agent'],
     localADD: req.socket.localAddress,
-    ip
+    ip,
+    getClientIp: getClientIp(req)
   })
 
 }
