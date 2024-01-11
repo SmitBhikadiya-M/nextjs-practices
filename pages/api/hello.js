@@ -216,6 +216,7 @@ export default async function handler(req, res) {
       ipv8: req.socket.remoteAddress,
       ipv9: req.connection.socket?.remoteAddress,
       ipv10: req.socket._peername,
+      ipv11: req.headers["x-forwarded-for"],
     });
   } catch (error) {
     console.error(error);
