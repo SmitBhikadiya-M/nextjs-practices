@@ -205,7 +205,7 @@ export default async function handler(req, res) {
     const ipv6 = interfaces["en0"]?.find(
       (entry) => entry.family === "IPv6"
     )?.address;
-    res.status(200).json({ ipv4, ipv6 });
+    res.status(200).json({ ipv4, ipv6, ipv7: req.connection.remoteAddress });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal Server Error" });
