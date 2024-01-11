@@ -4,7 +4,7 @@ import React from 'react';
 
 interface props{
     href: string;
-    children: React.ReactNode;
+    children?: React.ReactNode;
     hoverCard?: React.ReactNode;
 }
 

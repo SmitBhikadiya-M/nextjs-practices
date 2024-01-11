@@ -29,7 +29,7 @@ export const HeaderCard = (props: {
     return () => {
       document.body.removeEventListener("click", handleBodyClick);
     };
-  }, []);
+  }, [props]);
 
   return (
     <>
@@ -39,11 +39,11 @@ export const HeaderCard = (props: {
       >
         <div className={styles.cardLinks}>
           <ul>
-            <li><NavLink href="#" children={"How it works"} /></li>
-            <li><NavLink href="#" children={"About us"} /></li>
-            <li><NavLink href="#" children={"Blog"} /></li>
-            <li><NavLink href="#" children={"FAQs"} /></li>
-            <li><NavLink href="#" children={"Help center"} /></li>
+            <li><NavLink href="#">How it works</NavLink></li>
+            <li><NavLink href="#">About us</NavLink></li>
+            <li><NavLink href="#">Blog</NavLink></li>
+            <li><NavLink href="#">FAQs</NavLink></li>
+            <li><NavLink href="#">Help center</NavLink></li>
           </ul>
         </div>
         <div className={styles.border}></div>
@@ -53,10 +53,10 @@ export const HeaderCard = (props: {
         </div>
         <div className={styles.cardActions}>
           <Button
-            onClick={() => {}}
+            onClick={() => { }}
             theme={BUTTON_THEME.GREY}
             buttonStyle={{ color: "black", fontWeight: "700" }}
-            
+
             icon={
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -78,7 +78,7 @@ export const HeaderCard = (props: {
             <span className={styles.actionText}>Sign in</span>
           </Button>
           <Button
-            onClick={() => {}}
+            onClick={() => { }}
             theme={BUTTON_THEME.YELLOW}
             buttonStyle={{ color: "black", fontWeight: "700" }}
             icon={

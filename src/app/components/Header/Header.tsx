@@ -72,7 +72,7 @@ export const Header = () => {
 
   const hideMenu = useCallback(() => {
     setToggleMenu(false);
-  }, [toggleMenu]);
+  }, []);
 
   return (
     <>
@@ -133,21 +133,11 @@ export const Header = () => {
               }`}
             >
               <ul className={styles.linkItems}>
-                <li>
-                  <NavLink href="#" children={"How it works"} />
-                </li>
-                <li>
-                  <NavLink href="#" children={"About us"} />  
-                </li>
-                <li>
-                  <NavLink href="#" children={"Blog"} hoverCard={<Card />}/>
-                </li>
-                <li>
-                  <NavLink href="#" children={"FAQs"} />
-                </li>
-                <li>
-                  <a href="#">Help Center</a>
-                </li>
+              <li><NavLink href="#">How it works</NavLink></li>
+            <li><NavLink href="#">About us</NavLink></li>
+            <li><NavLink href="#">Blog</NavLink></li>
+            <li><NavLink href="#">FAQs</NavLink></li>
+            <li><NavLink href="#">Help center</NavLink></li>
               </ul>
             </nav>
             <nav className={styles.navRightLinksWrapper}>
